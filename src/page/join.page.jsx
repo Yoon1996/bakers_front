@@ -2,22 +2,20 @@ import { Button } from 'antd'
 import Input from 'antd/es/input/Input'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import './join.page.scss'
 
 const JoinPage = () => {
 
     const navigate = useNavigate();
 
-    const goPage = () => {
-        navigate('/')
-    }
-
   return (
-    <div className="wrap join__wrap">
-        <div id="join">
-            <div id="join__title">
+    <div className="join-page">
+        <div className="join-page__content">
+            <div className="join">
+            <div className="join__title">
                 회원가입
             </div>
-            <div id="join__form">
+            <div className="join__form">
                 <div className="join__id box">
                     <div className="join__id_sub">아이디</div>
                     <Input id='join__id' type='text' placeholder='이메일을 입력해주세요.'></Input>
@@ -41,9 +39,10 @@ const JoinPage = () => {
                     <div className="join__birth_sub">생년월일 8자리</div>
                     <Input type='text'></Input>
                 </div>
-                <Button>회원가입</Button>
+                <Button onClick={() => {}}>회원가입</Button>
             </div>
-        </div>
+            </div>
+            </div>
     </div>
   )
 }

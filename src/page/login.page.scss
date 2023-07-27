@@ -1,84 +1,41 @@
-//login template scss
-body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 //login.page.scss
 
-.box {
-  width: 500px;
-  height: 100px;
-}
-
-.wrap {
-  width: 700px;
-  height: 800px;
-  //   background-color: #d9d9d9;
+.login-page {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-}
 
-#login {
-  &__title {
-    font-size: 70px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  &__content {
+    flex-shrink: 0;
+    margin-top: 25vh;
   }
 
-  Input,
-  Button {
-    width: 500px;
-    height: 40px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
+  #login {
+    &__title {
+      font-size: 70px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
 
-  Button {
-    background-color: none;
-  }
+    Input,
+    Button {
+      width: 500px;
+      height: 40px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
 
-  &__form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-}
+    Button {
+      background-color: none;
+    }
 
-//join.page.scss
-
-.join__wrap {
-  height: 1000px;
-}
-
-#join {
-  &__title {
-    font-size: 60px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  Input,
-  Button {
-    width: 500px;
-    height: 60px;
-    margin-bottom: 10px;
-  }
-
-  Button {
-    background-color: none;
-  }
-
-  &__form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    &__form {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
   }
 }

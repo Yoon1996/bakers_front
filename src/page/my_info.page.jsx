@@ -1,16 +1,12 @@
 import { Button, Col, Form, Input, Row } from 'antd'
 import React from 'react'
-import SidebarComponent from '../componet/sidebar.component'
-import './my_info.page.scss'
+import SidebarComponent from '../component/sidebar.component'
+import './my-account.page.scss'
 
 const MyInfoPage = () => {
   return (
     <>
-    <Row className='main__layout' justify="center">
-      <Col span={6}>
-        <SidebarComponent></SidebarComponent>
-      </Col>
-      <Col span={12}>
+      <Col>
         <div className="my-info">
             <h2 className='main__title'>내 정보</h2>
             <Form name="form_item_path" layout="vertical">
@@ -36,8 +32,6 @@ const MyInfoPage = () => {
             </Form>
         </div>
       </Col>
-      <Col span={6}></Col>
-    </Row>
     </>
   )
 }

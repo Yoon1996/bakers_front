@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Col, Row, Space, notification } from 'antd'
-import SidebarComponent from '../componet/sidebar.component'
+import SidebarComponent from '../component/sidebar.component'
 import axios from 'axios';
 import { CloseCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import NotificationComponent from '../componet/notification.component';
+import NotificationComponent from '../component/notification.component';
+import { Outlet } from 'react-router-dom';
 
 
 
@@ -32,11 +33,7 @@ const CategoryListpage = () => {
 
   return (
     <>
-    <Row className='main__layout' justify="center">
-      <Col span={6}>
-        <SidebarComponent></SidebarComponent>
-      </Col>
-      <Col span={12}>
+    <Col>
         <div className="category">
           <div className="main__title">
             카테고리 관리
@@ -47,10 +44,8 @@ const CategoryListpage = () => {
           </div>
           <Button className='category__save_button'>저장하기</Button>
         </div>
-          <NotificationComponent></NotificationComponent>
       </Col>
-      <Col span={6}></Col>
-    </Row>
+    <Outlet></Outlet>
     </>
     )
 }

@@ -35,16 +35,12 @@ const HeaderLayout = ({isMyAccount}) => {
 
   const navigate = useNavigate();
 
-  const goPage = (page) => {
-    navigate(page);
-  }
-
   return (    
     <header className='header'>
       <div className="header__info">
           <div className="header__info--group">
-             <div className="header__info--login"><UserOutlined />로그인</div>
-             <div onClick={goPage("/login/member_join")} className="header__info--sign">회원가입</div>
+             <div onClick={() => navigate('/login/member_login')} className="header__info--login"><UserOutlined />로그인</div>
+             <div onClick={() => navigate('/login/member_join')} className="header__info--sign">회원가입</div>
           </div>
       </div>
       <div className="header__logo">

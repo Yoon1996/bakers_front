@@ -1,15 +1,11 @@
 import { Button, Col, Row } from 'antd'
 import React from 'react'
-import SidebarComponent from '../componet/sidebar.component'
+import SidebarComponent from '../component/sidebar.component'
 
 const WithdrawPage = () => {
   return (
     <>
-    <Row className='main__layout' justify="center">
-      <Col span={6}>
-        <SidebarComponent></SidebarComponent>
-      </Col>
-      <Col span={12}>
+      <Col>
         <div className="withdraw">
         <h2 className='main__title'>회원 탈퇴하기</h2>
         <div className="withdraw__notice">
@@ -21,8 +17,6 @@ const WithdrawPage = () => {
             <Button>취소하기</Button>
         </div>
       </Col>
-      <Col span={6}></Col>
-    </Row>
     </>
   )
 }

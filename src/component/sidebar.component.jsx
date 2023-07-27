@@ -42,7 +42,7 @@ function getItem(label, key, icon, children, type) {
     <Menu
         // theme={theme} //dark 테마
         onClick={onClick}
-        style={{ width: 256 }}
+        style={{ width: 150 }}
         selectedKeys={[current]}
         mode="inline"
         items={items}

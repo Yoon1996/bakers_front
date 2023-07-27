@@ -9,12 +9,11 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
     
-    const onClick = () => {
-        navigate('/login/member_join')
-    }
+    
 
   return (
-    <div className="wrap">
+    <div className="login-page">
+        <div className="login-page__content">
     <div id="login">
         <div id="login__title">
             LOGIN
@@ -27,8 +26,9 @@ const LoginPage = () => {
             아이디, 비밀번호 찾기
         </Button>
         <Button>google 아이디로 로그인하기</Button>
-        <Button onClick={onClick}>회원가입</Button>
+        <Button>회원가입</Button>
         </div>
+    </div>
     </div>
     </div>
   )
