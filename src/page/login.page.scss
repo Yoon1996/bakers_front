@@ -1,0 +1,84 @@
+//login template scss
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//login.page.scss
+
+.box {
+  width: 500px;
+  height: 100px;
+}
+
+.wrap {
+  width: 700px;
+  height: 800px;
+  //   background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#login {
+  &__title {
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  Input,
+  Button {
+    width: 500px;
+    height: 40px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  Button {
+    background-color: none;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+//join.page.scss
+
+.join__wrap {
+  height: 1000px;
+}
+
+#join {
+  &__title {
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  Input,
+  Button {
+    width: 500px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  Button {
+    background-color: none;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

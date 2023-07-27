@@ -1,8 +1,10 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const LoginTemplate = () => {
   return (
-    <div>LoginTemplate</div>
+    <Outlet>
+    </Outlet>
   )
 }
 
