@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./join.page.scss";
 import axios from "axios";
+import { nicknameCheck, signUp } from "../service/user.service";
+import { Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged } from "rxjs";
 
 const JoinPage = () => {
   //   const navigate = useNavigate();
@@ -15,31 +18,73 @@ const JoinPage = () => {
   const [name, setName] = useState("");
   const [birth, setbirth] = useState("");
 
-  const SIGN_URL = "http://localhost:8080/users/sign-up";
+  const [nicknameSubject] = useState(() => new Subject())
+
+
+  const [errors, setErrors] = useState({})
 
   useEffect(() => {
-    getData();
-  });
-
-  const getData = async () => {
-    try {
-      const result = await axios.get(SIGN_URL);
-      console.log(result.data);
-    } catch (error) {
-      console.log("error: ", error);
+    const sub = nicknameChangeSub()
+    return () => {
+      console.log('unsubscribe !!!')
+      sub.unsubscribe()
     }
-  };
+  }, [])
+
+
+
+  const nicknameChangeSub = () => {
+    return nicknameSubject
+    .pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+      )
+      .subscribe(newNickname => {
+        setNickname(newNickname)
+        if(!nickname) {
+          setErrors({
+          ...errors,
+          nickname: {require: '닉네임을 입력해주세요.'}})}
+        else if(nickname.length > 20) {
+          setErrors({
+            ...errors,
+            nickname: {
+              maxLength: "닉네임은 20자 이내로 작성해주세요."
+            }
+          })
+        } else {
+          setErrors({
+            ...errors,
+            nickname: null
+          })
+
+          nicknameCheck(newNickname)
+          .then(res => {
+            console.log('res: ', res);
+          })
+          .catch(errors => {
+            console.log('errors: ', errors);
+          })
+          console.log('newNickname:', newNickname);
+        }
+    })
+}
+
+    
+
 
   //회원가입 요청
   const register = () => {
-    axios
-      .post(SIGN_URL, {
-        nickname: nickname,
+
+    const signUpParams = {
+      nickname: nickname,
         password: pw,
         email: email,
         name: name,
         birth: birth,
-      })
+    }
+
+    signUp(signUpParams)
       .then(function (response) {
         console.log("성공", response);
         // response
@@ -65,9 +110,9 @@ const JoinPage = () => {
               <Input
                 id="join__id"
                 type="text"
-                value={nickname}
+                defaultValue={nickname}
                 onChange={(event) => {
-                  setNickname(event.target.value);
+                  nicknameSubject.next(event.target.value)
                 }}
                 placeholder="이메일을 입력해주세요."
               ></Input>
