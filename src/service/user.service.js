@@ -9,4 +9,9 @@ export const nicknameCheck = (nickname) => {
 
 export const signUp = (params) => {
     return axios.post(`${baseUrl}/sign-up`, params)
+
+}
+
+export const loginCheck = (params) => {
+    return axios.post(`${baseUrl}/login`, params)
 }

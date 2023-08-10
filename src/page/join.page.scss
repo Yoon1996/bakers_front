@@ -40,3 +40,15 @@
     background-color: none;
   }
 }
+
+.hint {
+  font-size: 12px;
+  margin-top: -6px;
+  color: red;
+  &__duplicated {
+  }
+
+  &__usable {
+    color: blue;
+  }
+}
