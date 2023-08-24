@@ -20,10 +20,10 @@ const CategoryListpage = () => {
       try {
         const result = await axios.get('http://localhost:8080/category');
         setCategoryList(result.data.categoryLists)
-        console.log('result: ', result);
+        // console.log('result: ', result);
         
       } catch(err) {
-        console.log("Error >>", err);
+        // console.log("Error >>", err);
       }
     }
 

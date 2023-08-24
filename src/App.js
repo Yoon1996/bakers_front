@@ -1,22 +1,53 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import { Button, Calendar, DatePicker, Space, version } from "antd";
 import MainTemplate from './template/main.template';
 import RecipeListpage from './page/recipe_list.page';
 import CategoryListpage from './page/category_list.page';
-import "tailwindcss/tailwind.css";
 import MyAccountTemplate from './template/my-account.template';
 import MyInfoPage from './page/my_info.page';
 import WithdrawPage from './page/withdraw_page';
 import LoginTemplate from './template/login.template';
 import JoinPage from './page/join.page';
 import LoginPage from './page/login.page';
+import { useEffect } from 'react';
+import { clearAccessToken, getAccessToken } from './util/localstorage.util';
+import axios from 'axios';
+import { tokenVerify } from './service/user.service';
+import { useDispatch } from 'react-redux';
+import { loginUser } from './store/user.store';
+import { getPost } from './service/post.service';
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const accessToken = getAccessToken();
+    if(accessToken){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      tokenVerify()
+      .then(res => {
+        console.log('res: ', res);
+        dispatch(loginUser(res.data))
+        return getPost()
+      })
+      .then(res => {
+        console.log('res: ', res);
+        
+      })
+      .catch(error => {
+        console.log(error)
+        clearAccessToken()
+      })
+    }
+
+  }, [])
+
+
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Navigate replace to="/main"/>}></Route>
+      <Route path='/' element={<Navigate replace to="/main/recipe_list"/>}></Route>
       <Route path='/main' element={<MainTemplate></MainTemplate>}>
         <Route path='recipe_list' element={<RecipeListpage></RecipeListpage>}></Route>
       </Route>
@@ -31,14 +62,6 @@ function App() {
       </Route>
     </Routes>
     </BrowserRouter>
-
-    // <div className="App">
-    //     <DatePicker />
-    //     <Button danger={true}>Button</Button>
-    //     <div className='calendar_wrap'>
-    //     <Calendar></Calendar>
-    //     </div>
-    // </div>
   );
 }
 

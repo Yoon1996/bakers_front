@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'antd/dist/reset.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import { userReducer } from './store/user.store';
+
+const rootReducer = combineReducers({
+  user: userReducer
+})
+
+const rootStore = configureStore({
+  reducer: rootReducer
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Provider store={rootStore}>
     <App />
+    </Provider>
   </React.StrictMode>
 );
 

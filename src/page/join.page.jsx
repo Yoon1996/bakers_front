@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button } from "antd";
 import Input from "antd/es/input/Input";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -228,7 +228,7 @@ const JoinPage = () => {
             <div className="join__pw_again">
               <Input
                 id="join__pw_again"
-                type="text"
+                type="password"
                 value={rePw}
                 onChange={(event) => {
                   setRePw(event.target.value);
