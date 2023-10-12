@@ -19,6 +19,7 @@
       display: inline-block;
       font-weight: bold;
       margin-right: 5px;
+      cursor: pointer;
     }
 
     &--logout {
@@ -53,6 +54,7 @@
       font-style: normal;
       font-weight: 700;
       line-height: 110%;
+      cursor: pointer;
     }
   }
 
@@ -77,6 +79,7 @@
         align-items: center;
         gap: 8px;
         color: var(--cool-gray-90, #21272a);
+        cursor: pointer;
 
         /* Other/Menu M */
         font-family: Roboto;
@@ -96,6 +99,7 @@
           font-style: normal;
           font-weight: 500;
           line-height: 100%; /* 16px */
+          border: none;
         }
       }
     }

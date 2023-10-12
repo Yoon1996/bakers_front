@@ -71,7 +71,7 @@ const LoginPage = () => {
             />
             <Input
               id="login__pw"
-              type="pw"
+              type="password"
               value={pw}
               onChange={onPwHandler}
               placeholder="비밀번호를 입력해주세요."

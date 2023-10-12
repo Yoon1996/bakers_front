@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import "./recipe_item.component.scss";
-import { DownOutlined, PlusCircleFilled, RestFilled } from "@ant-design/icons";
+import { DownOutlined, PlusCircleFilled } from "@ant-design/icons";
 import { Button, Dropdown, Input, Modal, Space } from "antd";
-import { categoryDrop, create } from "../service/recipe.service";
-import { async } from "rxjs";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { create } from "../service/recipe.service";
+import "./recipe_item.component.scss";
+import { viewCategories } from "../service/category.service";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCategory } from "../store/category.store";
 
 const RecipeItemComponent = () => {
   const [recipeName, setRecipeName] = useState("");
-  const [ingredientName, setIngredientName] = useState("");
-  const [ea, setEa] = useState("");
-  const [unit, setUnit] = useState("");
 
   const navigate = useNavigate();
-
+  const categoryDropItem = useSelector((rootState) => rootState.categoryList);
+  const [changeCategory, setChangeCategory] = useState("");
   const [errors, setErrors] = useState({});
 
   //모달창 관리
@@ -23,51 +23,59 @@ const RecipeItemComponent = () => {
     setIsModalOpen(true);
   };
   //모달창 닫기
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  //카텔고리 드롭다운 관리
+  const items = categoryDropItem.map((category, index) => ({
+    label: `${category.name}`,
+    key: `${index}`,
+  }));
 
-  //   useEffect(() => {
-  //     categoryDrop()
-  //       .then(function () {})
-  //       .catch(function () {});
-  //   });
-  const items = [
-    {
-      label: "제과",
-      key: "0",
-    },
-    {
-      label: "제빵",
-      key: "1",
-    },
-    {
-      label: "3rd menu item",
-      key: "2",
-    },
-  ];
+  //레시피 등록 유효성 검사
+  const recipeValidator = () => {
+    const errors = {};
+
+    if (!recipeName) {
+      errors.name = { require: "레시피 이름을 입력해주세요." };
+    }
+
+    if (!changeCategory) {
+      errors.categoryName = { require: "카테고리를 선택해주세요." };
+    }
+
+    return errors;
+  };
 
   //레시피 등록 이벤트
   const recipeCreate = () => {
     const recipeParam = {
       name: recipeName,
       ingredientList,
+      categoryName: changeCategory,
     };
 
+    const errorCheckrRes = recipeValidator(recipeParam);
+
+    if (Object.keys(errorCheckrRes).length) {
+      setErrors(errorCheckrRes);
+      return;
+    }
+
     create(recipeParam)
-      .then(function (response) {
-        console.log("성공", response);
+      .then(function (res) {
+        console.log("성공이니?", res);
         setIsModalOpen(false);
         navigate("/");
       })
       .catch(function (error) {
-        console.log("error: ", error);
-        alert("등록되어있는이름입니다!");
+        console.log("ssserror: ", error);
+        if (error.response.data.statusMessage === "DUPLICATED_NAME") {
+          setErrors({
+            ...errors,
+            name: { require: "동일한 레시피의 이름이 존재합니다." },
+          });
+        }
       });
   };
 
@@ -91,6 +99,7 @@ const RecipeItemComponent = () => {
     ingredientList[index].unit = value;
     setIngredientList([...ingredientList]);
   };
+
   return (
     <>
       <div className="recipe__item">
@@ -112,20 +121,34 @@ const RecipeItemComponent = () => {
               }}
               placeholder="레시피 이름"
             ></Input>
+            <div className="modal__hint">
+              {errors?.name?.require ? <p>{errors?.name?.require}</p> : ""}
+            </div>
           </div>
           <div className="modal__category modal__size">
             <div>카테고리</div>
             <Dropdown
               menu={{
                 items,
+                onClick: (params) => {
+                  setChangeCategory(`${items[params.key].label}`);
+                  console.log(params.key);
+                },
               }}
               trigger={["click"]}
             >
               <Space>
-                제과
+                {changeCategory}
                 <DownOutlined />
               </Space>
             </Dropdown>
+            <div className="modal__hint">
+              {errors?.categoryName?.require ? (
+                <p>{errors?.categoryName?.require}</p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
 
           {ingredientList.map((ingredient, index) => (

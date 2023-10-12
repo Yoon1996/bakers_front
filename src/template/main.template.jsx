@@ -9,7 +9,7 @@ const MainTemplate = () => {
       <HeaderLayout isMyAccount={false} />
       <main>
         <div className="main__content">
-          <Row className="main__layout" justify="center">
+          <Row className="main__layout">
             <Outlet></Outlet>
           </Row>
         </div>

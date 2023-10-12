@@ -1,17 +1,22 @@
-import React, { } from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import 'antd/dist/reset.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
+import 'antd/dist/reset.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { combineReducers } from 'redux';
+import App from './App';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
 import { userReducer } from './store/user.store';
+import { categoryListReducer } from './store/category.store';
+import { RecipeReducer } from './store/recipe.store';
+import { modalReducer } from './store/modal.store';
 
 const rootReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  categoryList: categoryListReducer,
+  recipe: RecipeReducer,
+  modal: modalReducer,
 })
 
 const rootStore = configureStore({
@@ -22,7 +27,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={rootStore}>
-    <App />
+      <App />
     </Provider>
   </React.StrictMode>
 );
