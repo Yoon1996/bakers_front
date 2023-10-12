@@ -41,5 +41,5 @@ export const pwCheck = (params) => {
 
 //탈퇴하기
 export const withDraw = () => {
-    return axios.delete(`${baseUrl}/user/`)
+    return axios.put(`${baseUrl}/user/`)
 }

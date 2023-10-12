@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginCheck } from "../service/user.service";
 import axios from "axios";
 import { loginUser } from "../store/user.store";
+import FindModalComponent from "../component/find_modal.component";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -53,6 +54,16 @@ const LoginPage = () => {
       });
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showFindModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="login-page">
       <div className="login-page__content">
@@ -77,7 +88,7 @@ const LoginPage = () => {
               placeholder="비밀번호를 입력해주세요."
             />
             <Button onClick={login}>로그인</Button>
-            <Button type="link" id="login_search">
+            <Button onClick={showFindModal} type="link" id="login_search">
               아이디, 비밀번호 찾기
             </Button>
             <Button>google 아이디로 로그인하기</Button>
@@ -87,6 +98,10 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+      <FindModalComponent
+        isModalOpen={isModalOpen}
+        handleCancel={handleCancel}
+      ></FindModalComponent>
     </div>
   );
 };

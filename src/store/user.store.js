@@ -1,7 +1,6 @@
-import { configureStore, createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { clearAccessToken, getAccessToken, setAccessToken } from '../util/localstorage.util'
-import MyInfoPage from '../page/my_info.page'
 
 const userInitialState = {
     isInit: false

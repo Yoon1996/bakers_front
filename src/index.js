@@ -7,16 +7,14 @@ import { combineReducers } from 'redux';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { userReducer } from './store/user.store';
 import { categoryListReducer } from './store/category.store';
 import { RecipeReducer } from './store/recipe.store';
-import { modalReducer } from './store/modal.store';
+import { userReducer } from './store/user.store';
 
 const rootReducer = combineReducers({
   user: userReducer,
   categoryList: categoryListReducer,
   recipe: RecipeReducer,
-  modal: modalReducer,
 })
 
 const rootStore = configureStore({

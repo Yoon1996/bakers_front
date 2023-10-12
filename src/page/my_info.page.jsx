@@ -1,16 +1,14 @@
 import { Button, Col, Form, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Subject, debounceTime, distinctUntilChanged } from "rxjs";
+import PasswordCheckModal from "../component/password_check.modal";
 import { infoUpdate, nicknameCheck } from "../service/user.service";
 import { updateUser } from "../store/user.store";
-import "./my_info.page.scss";
 import "./my-account.page.scss";
-import PasswordCheckModal from "../component/password_check.modal";
-import { Subject, debounceTime, distinctUntilChanged } from "rxjs";
+import "./my_info.page.scss";
 
 const MyInfoPage = () => {
-  const [info, setInfo] = useState([]);
-
   const user = useSelector((rootState) => rootState.user);
   console.log("user: ", user);
 

@@ -1,24 +1,18 @@
 import { Button, Col } from "antd";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import PasswordCheckModal from "../component/password_check.modal";
-import WithdrawCheckModal from "../component/withdraw_check.modal";
-import { closeModal, openModal } from "../store/modal.store";
 
 const WithdrawPage = () => {
-  //모달창 관리 reducer
-  const isPasswordModalOpen = useSelector((state) => state.modal.isModalOpen);
-  const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openPasswordModal = () => {
-    dispatch(openModal());
+  //모달창 닫기
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
-  const closePasswordModal = () => {
-    dispatch(closeModal());
+  const withDrawHandler = () => {
+    setIsModalOpen(true);
   };
-
-  console.log(dispatch(openModal()));
 
   return (
     <>
@@ -30,8 +24,12 @@ const WithdrawPage = () => {
           </div>
         </div>
         <div className="withdraw__button">
-          <Button onClick={openPasswordModal}>탈퇴하기</Button>
+          <Button onClick={withDrawHandler}>탈퇴하기</Button>
         </div>
+        <PasswordCheckModal
+          isModalOpen={isModalOpen}
+          handleCancle={handleCancel}
+        ></PasswordCheckModal>
       </Col>
     </>
   );

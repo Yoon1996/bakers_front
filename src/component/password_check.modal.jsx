@@ -1,8 +1,7 @@
 import { Button, Input, Modal } from "antd";
 import React, { useState } from "react";
-import { pwCheck } from "../service/user.service";
-import { isEditable } from "@testing-library/user-event/dist/utils";
-import WithdrawCheckModal from "./withdraw_check.modal";
+import { pwCheck, withDraw } from "../service/user.service";
+import { useNavigate } from "react-router-dom";
 
 const PasswordCheckModal = ({ isModalOpen, handleCancle, isEditMode }) => {
   const [password, setPassword] = useState("");
@@ -11,6 +10,7 @@ const PasswordCheckModal = ({ isModalOpen, handleCancle, isEditMode }) => {
   const errorStyle = {
     color: "red",
   };
+  const navigate = useNavigate();
 
   const submit = () => {
     const params = {
@@ -25,6 +25,14 @@ const PasswordCheckModal = ({ isModalOpen, handleCancle, isEditMode }) => {
               isEditMode();
             } else {
               handleCancle();
+              withDraw()
+                .then((res) => {
+                  console.log("res: ", res);
+                  navigate("/login/member_login");
+                })
+                .catch((err) => {
+                  console.log("err: ", err);
+                });
             }
           }
         } else {

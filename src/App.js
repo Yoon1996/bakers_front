@@ -1,22 +1,21 @@
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import MainTemplate from './template/main.template';
-import RecipeListpage from './page/recipe_list.page';
+import AuthGaurdComponent from './component/auth_gaurd_component';
 import CategoryListpage from './page/category_list.page';
-import MyAccountTemplate from './template/my-account.template';
-import MyInfoPage from './page/my_info.page';
-import WithdrawPage from './page/withdraw_page';
-import LoginTemplate from './template/login.template';
 import JoinPage from './page/join.page';
 import LoginPage from './page/login.page';
-import { useEffect } from 'react';
-import { clearAccessToken, getAccessToken } from './util/localstorage.util';
-import axios from 'axios';
+import MyInfoPage from './page/my_info.page';
+import RecipeListpage from './page/recipe_list.page';
+import WithdrawPage from './page/withdraw_page';
 import { tokenVerify } from './service/user.service';
-import { useDispatch } from 'react-redux';
 import { loginUser, userInit } from './store/user.store';
-import { getPost } from './service/post.service';
-import AuthGaurdComponent from './component/auth_gaurd_component';
+import LoginTemplate from './template/login.template';
+import MainTemplate from './template/main.template';
+import MyAccountTemplate from './template/my-account.template';
+import { clearAccessToken, getAccessToken } from './util/localstorage.util';
 
 function App() {
 
