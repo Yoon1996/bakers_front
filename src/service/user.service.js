@@ -24,6 +24,11 @@ export const loginCheck = (params) => {
     return axios.post(`${baseUrl}/login`, params)
 }
 
+//소셜로그인
+export const socialLogin = (params) => {
+    return axios.post(`${baseUrl}/social-login`, params)
+}
+
 //로그아웃
 export const logout = () => {
     return axios.get(`${baseUrl}/logout`)

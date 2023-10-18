@@ -7,6 +7,7 @@ import { loginCheck } from "../service/user.service";
 import axios from "axios";
 import { loginUser } from "../store/user.store";
 import FindModalComponent from "../component/find_modal.component";
+import GoogleLoginButtonComponent from "../component/google_login_button.component";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ const LoginPage = () => {
             <Button onClick={showFindModal} type="link" id="login_search">
               아이디, 비밀번호 찾기
             </Button>
-            <Button>google 아이디로 로그인하기</Button>
+            <GoogleLoginButtonComponent></GoogleLoginButtonComponent>
             <Button onClick={() => navigate("/login/member_join")}>
               회원가입
             </Button>
