@@ -110,7 +110,9 @@ const LoginPage = () => {
               아이디, 비밀번호 찾기
             </Button>
             {/* <GoogleLoginButtonComponent></GoogleLoginButtonComponent> */}
-            <Button onClick={() => googleLogin()}>loginBUtton</Button>
+            <Button onClick={() => googleLogin()}>
+              구글 아이디로 로그인하기
+            </Button>
             <Button onClick={() => navigate("/login/member_join")}>
               회원가입
             </Button>
