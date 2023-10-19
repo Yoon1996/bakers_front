@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import "./login.page.scss";
+import { useGoogleLogin } from "@react-oauth/google";
 import { Button, Input } from "antd";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginCheck } from "../service/user.service";
-import axios from "axios";
-import { loginUser } from "../store/user.store";
+import { useNavigate } from "react-router-dom";
 import FindModalComponent from "../component/find_modal.component";
-import GoogleLoginButtonComponent from "../component/google_login_button.component";
+import { loginCheck, socialLogin } from "../service/user.service";
+import { loginUser } from "../store/user.store";
+import "./login.page.scss";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -65,6 +64,24 @@ const LoginPage = () => {
     setIsModalOpen(false);
   };
 
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      socialLogin(tokenResponse)
+        .then((res) => {
+          console.log("res: ", res.data);
+          dispatch(loginUser(res.data));
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log("err: ", err);
+        });
+    },
+    onError: (errorResponse) => {
+      console.log("errorResponse: ", errorResponse);
+    },
+    flow: "auth-code",
+  });
+
   return (
     <div className="login-page">
       <div className="login-page__content">
@@ -92,7 +109,8 @@ const LoginPage = () => {
             <Button onClick={showFindModal} type="link" id="login_search">
               아이디, 비밀번호 찾기
             </Button>
-            <GoogleLoginButtonComponent></GoogleLoginButtonComponent>
+            {/* <GoogleLoginButtonComponent></GoogleLoginButtonComponent> */}
+            <Button onClick={() => googleLogin()}>loginBUtton</Button>
             <Button onClick={() => navigate("/login/member_join")}>
               회원가입
             </Button>

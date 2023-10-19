@@ -16,10 +16,13 @@ import LoginTemplate from './template/login.template';
 import MainTemplate from './template/main.template';
 import MyAccountTemplate from './template/my-account.template';
 import { clearAccessToken, getAccessToken } from './util/localstorage.util';
+import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
 function App() {
 
   const dispatch = useDispatch()
+  const clientId =
+    "926618531398-36t5psht9gd5c2sk9irjdf8vlvltpd22.apps.googleusercontent.com";
 
   useEffect(() => {
     const accessToken = getAccessToken();
@@ -43,26 +46,28 @@ function App() {
 
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Navigate replace to="/main/recipe_list" />}></Route>
-        <Route path='/main' element={
-          <AuthGaurdComponent>
-            <MainTemplate></MainTemplate>
-          </AuthGaurdComponent>}>
-          <Route path='recipe_list' element={<RecipeListpage></RecipeListpage>}></Route>
-        </Route>
-        <Route path='/login' element={<LoginTemplate></LoginTemplate>}>
-          <Route path='member_login' element={<LoginPage></LoginPage>}></Route>
-          <Route path='member_join' element={<JoinPage></JoinPage>}></Route>
-        </Route>
-        <Route path='/my-account' element={<AuthGaurdComponent><MyAccountTemplate></MyAccountTemplate></AuthGaurdComponent>}>
-          <Route path='category_list_page' element={<CategoryListpage></CategoryListpage>}></Route>
-          <Route path='my_info_page' element={<MyInfoPage></MyInfoPage>}></Route>
-          <Route path='withdraw_page' element={<WithdrawPage></WithdrawPage>}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={clientId}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Navigate replace to="/main/recipe_list" />}></Route>
+          <Route path='/main' element={
+            <AuthGaurdComponent>
+              <MainTemplate></MainTemplate>
+            </AuthGaurdComponent>}>
+            <Route path='recipe_list' element={<RecipeListpage></RecipeListpage>}></Route>
+          </Route>
+          <Route path='/login' element={<LoginTemplate></LoginTemplate>}>
+            <Route path='member_login' element={<LoginPage></LoginPage>}></Route>
+            <Route path='member_join' element={<JoinPage></JoinPage>}></Route>
+          </Route>
+          <Route path='/my-account' element={<AuthGaurdComponent><MyAccountTemplate></MyAccountTemplate></AuthGaurdComponent>}>
+            <Route path='category_list_page' element={<CategoryListpage></CategoryListpage>}></Route>
+            <Route path='my_info_page' element={<MyInfoPage></MyInfoPage>}></Route>
+            <Route path='withdraw_page' element={<WithdrawPage></WithdrawPage>}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 }
 
