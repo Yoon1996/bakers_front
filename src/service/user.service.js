@@ -1,7 +1,8 @@
 import axios from "axios";
 import { env } from "../evnironment/environment"
 
-const baseUrl = `${env.hosturl}/users`
+// const baseUrl = `${env.hosturl}/users`
+const baseUrl = `${process.env.REACT_APP_HOST}/users`
 
 //닉네임 중복
 export const nicknameCheck = (nickname) => {

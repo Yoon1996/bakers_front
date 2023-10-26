@@ -125,6 +125,7 @@ const RecipeItemComponent = () => {
               {errors?.name?.require ? <p>{errors?.name?.require}</p> : ""}
             </div>
           </div>
+          <Input type="file"></Input>
           <div className="modal__category modal__size">
             <div>카테고리</div>
             <Dropdown

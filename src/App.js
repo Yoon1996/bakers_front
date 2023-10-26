@@ -1,3 +1,4 @@
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,9 +17,10 @@ import LoginTemplate from './template/login.template';
 import MainTemplate from './template/main.template';
 import MyAccountTemplate from './template/my-account.template';
 import { clearAccessToken, getAccessToken } from './util/localstorage.util';
-import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
 function App() {
+
+  console.log('process.env.REACT_APP_HOST: ', process.env.REACT_APP_HOST);
 
   const dispatch = useDispatch()
   const clientId =

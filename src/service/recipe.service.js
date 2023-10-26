@@ -2,6 +2,7 @@ import axios from "axios";
 import { env } from "../evnironment/environment"
 
 const baseUrl = `${env.hosturl}/recipe`
+// const baseUrl = `${process.env.REACT_APP_HOST}/recipe`
 
 //카테고리 드롭다운 api
 export const categoryDrop = () => {
