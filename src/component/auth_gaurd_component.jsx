@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 
 const AuthGaurdComponent = ({ children }) => {
   const user = useSelector((rootState) => rootState.user);
+  console.log("user: ", user);
 
   if (!user.isInit) {
     return <div>Loading...</div>;

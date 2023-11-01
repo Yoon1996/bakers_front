@@ -1,28 +1,30 @@
-name: bakers-front
+name: bakers-front #워크플로우의 이름을 설정한다.
 
-on:
-  push:
-    branches:
+on: # 이벤트 트리거 설정
+  push: # 'push' 이벤트를 기준으로 설정
+    branches: # push 이벤트가 발생하는 브랜치를 지정
       - master
 
-jobs:
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
+jobs: # 워크 플로우 내에서 수행할 작업을 정의
+  build: # 작업의 이름을 'build'로 설정
+    runs-on: ubuntu-20.04 # 작업을 수행 할 환경을 설정
+    steps: # 작업 내에서 수행 할 단계를 정의
+      - name: Checkout source code # 해당 단계의 이름을 'Checkout source code' 로 지정
+        uses: actions/checkout@v2 # GitHub Actions에서 제공하는 checkout 액션을 사용
+
+        #checkout = 깃허브의 코드 저장소에 올려둔 코드를 CI 서버로 내려받은 후 특정 브랜치로 전환하는 행위
 
       - name: Install Dependencies # node module install
-        run: npm install
+        run: npm install #npm 을 사용하여 Dependencies 설치
 
       - name: Build # project build
-        run: npm run build:prod
-        env:
-          CI: ""
+        run: npm run build:prod # 프로젝트를 프로덕션 환경으로 빌드.
+        env: # 환경변수를 설정
+          CI: "" # CI 환경 변수를 빈 문자열로 설정
 
-      - name: Deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-northeast-2
-        run: aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET }} --delete
+      - name: Deploy # 배포
+        env: # 환경 변수 설정
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} #AWS 액세스 키를 설정
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} #AWS 시크릿 액세스 키를 설정
+          AWS_REGION: ap-northeast-2 # AWS 지역을 'ap-northeast-2'로 설정
+        run: aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET }} --delete #빌드된 어플리케이션을 AWS S#로 동기화 하여 배포.
